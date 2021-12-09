@@ -47,24 +47,26 @@ def depth_pt2
 end
 
 def window_analysis(array, window_size = 3)
-    # Accepts an array of integers and a window size
+    # Accepts an array of integers and an optional window size
     previous_sum = 0
+
     
     i = 0
-    while i < array.length do
+    while i < (array.length-window_size) do
         #Iterate through the array
         if i >= window_size-1
             # When the loop has reached the window size, it takes the sum of all values in the window and compares it to the previous sum
             # Initialize the window
-            window = array.slice(i, window_size)
+            window = array.slice(i, i+window_size)
             # The sum of the window
             window_sum = window.reduce(:+)
         end
         #Increment the loop counter
         i += 1
     end
+    puts "Analysis ran #{i} time(s)."
 
 end
 
 
-depth
+depth_pt2
