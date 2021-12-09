@@ -1,5 +1,5 @@
 =begin 
-https://adventofcode.com/2021/day/1#part2
+````Begin Quote From````````https://adventofcode.com/2021/day/1#part2
 
 Considering every single measurement isn't as useful as you expected: there's just too much noise in the data.
 
@@ -34,20 +34,35 @@ H: 792 (increased)
 In this example, there are 5 sums that are larger than the previous sum.
 
 Consider sums of a three-measurement sliding window. How many sums are larger than the previous sum?
+`````End Quote````
+Additional Reading: https://youtu.be/MK-NZ4hN7rs
+
 =end
 
-def depth 
-    puts "Running Depth Analysis"
+def depth_pt2 
+    puts "Running Depth Analysis 2.0"
         # Loads the puzzle input file line by line to populate an array
         data = IO.readlines("input.txt")
         window_analysis(data, 3)
 end
 
 def window_analysis(array, window_size = 3)
-    # Initialize the window
-    window = array.slice(0, window_size)
-    # The sum of the window
-    window_sum = window.reduce(:+)
+    # Accepts an array of integers and a window size
+    previous_sum = 0
+    
+    i = 0
+    while i < array.length do
+        #Iterate through the array
+        if i >= window_size-1
+            # When the loop has reached the window size, it takes the sum of all values in the window and compares it to the previous sum
+            # Initialize the window
+            window = array.slice(i, window_size)
+            # The sum of the window
+            window_sum = window.reduce(:+)
+        end
+        #Increment the loop counter
+        i += 1
+    end
 
 end
 
