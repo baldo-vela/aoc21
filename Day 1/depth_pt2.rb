@@ -43,30 +43,48 @@ def depth_pt2
     puts "Running Depth Analysis 2.0"
         # Loads the puzzle input file line by line to populate an array
         data = IO.readlines("input.txt")
+        test_data=IO.readlines("test_input.txt")
         window_analysis(data, 3)
+        window_analysis(test_data, 3)
 end
 
 def window_analysis(array, window_size = 3)
     # Accepts an array of integers and an optional window size
     previous_sum = 0
 
+    # Register for the number of times the sum of the window is larger than the previous sum
+    counter = 0
     
     i = 0
-    while i < (array.length-window_size) do
-        #Iterate through the array
-        if i >= window_size-1
-            # When the loop has reached the window size, it takes the sum of all values in the window and compares it to the previous sum
-            # Initialize the window
-            window = array.slice(i, i+window_size)
-            # The sum of the window
-            window_sum = window.reduce(:+)
+    while i <= (array.length-window_size) do
+        # When the loop has reached the window size, it takes the sum of all values in the window and compares it to the previous sum
+        # Initialize the window, calling #slice with the index, and the length of the window
+        window = array.slice(i, window_size)
+        # The sum of the window
+        window_sum = window.reduce(:+).to_i
+        if (previous_sum !=0) && previous_sum < window_sum
+            # If the new sum is larger than the previous sum, increase the counter
+            counter += 1
         end
+        previous_sum = window_sum
+
         #Increment the loop counter
         i += 1
     end
     puts "Analysis ran #{i} time(s)."
+    puts "Tabulated #{counter} sums larger than previous."
 
 end
+# def better_window_analysis(array, window_size = 3)
+#     # Accepts an array of integers and an optional window size
+#     previous_sum = 0
 
+#     # Register for the number of times the sum of the window is larger than the previous sum
+#     counter = 0
+    
+#     array.each_slice(window_size) do |window|
+#     puts "Analysis ran #{i} time(s)."
+#     puts "Tabulated #{counter} sums larger than previous."
 
+# end
 depth_pt2
