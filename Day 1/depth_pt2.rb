@@ -44,7 +44,9 @@ def depth_pt2
         # Loads the puzzle input file line by line to populate an array
         data = IO.readlines("input.txt")
         test_data=IO.readlines("test_input.txt")
+        puts "Attempting to Analyze puzzle imput file:"
         window_analysis(data, 3)
+        puts "Attempting to Analyze Test Data for comparison:"
         window_analysis(test_data, 3)
 end
 
@@ -59,15 +61,18 @@ def window_analysis(array, window_size = 3)
     while i <= (array.length-window_size) do
         # When the loop has reached the window size, it takes the sum of all values in the window and compares it to the previous sum
         # Initialize the window, calling #slice with the index, and the length of the window
-        window = array.slice(i, window_size)
+        #window = array.slice(i, window_size)
+
         # The sum of the window
-        window_sum = window.reduce(:+).to_i
+        window_sum = (array[i].to_i + array[i+1].to_i + array[i+2].to_i).to_i
         if (previous_sum !=0) && previous_sum < window_sum
             # If the new sum is larger than the previous sum, increase the counter
             counter += 1
         end
         previous_sum = window_sum
-
+        if array.length > 0 && ( i <= 20 || i > array.length-10) 
+            puts "#{i} #{window_sum}"
+        end
         #Increment the loop counter
         i += 1
     end
