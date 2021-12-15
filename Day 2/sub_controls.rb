@@ -1,42 +1,60 @@
 def sub_controls
     puts "Intializing Sub-Control System"
     puts " 🔹 🔹 🔹 🔹 🔹 🔹 🔹 🔹 🔹 🔹 🔹 🔹 🔹 🔹 🔹 🔹 🔹 🔹 🔹 🔹 🔹 🔹 🔹 🔹 🔹 🔹 🔹 🔹 🔹 🔹 🔹 🔹 \n"
+    
+    # An array of strings that will be used to store the sub control commands
     data = IO.readlines("input.txt")
+    
+    # Let Position be [horizontal, vertical]
     postion = [0,0]
+    
     if data == nil
         puts "Error: File not found"
-        exit
-    elsif 
-        puts "File found"
-        puts "Loaded #{data.length} lines of data"
+    else 
+        puts "File found \nLoaded #{data.length} lines of data"
         data.each do |line|
             puts "Processing line: #{line}"
             process_command(line, postion)
         end
+        puts "Final Position: \n Horizontal:#{postion[0]}\n Depth:#{postion[1]} \nCross-Product:#{postion[0]*postion[1]}"
     end
 end
 
-class MoveCommand
-    attr_accessor :direction, :distance
+=begin 
+forward X increases the horizontal position by X units.
+down X increases the depth by X units.
+up X decreases the depth by X units.
 
-    # class array to contain all given commands
-    @@move_commands = []
-
-    def initialize(direction, distance)
-        @direction = direction
-        @distance = distance
-    end
-
-    def self.all
-        # returns @all array move commands
-        return @@move_commands
-    end
-end
-
+Note that since you're on a submarine, down and up affect your depth, and so they have the opposite result of what you might expect.
+=end
 def process_command(line, position)
-    #accepts the string of the command and the current position
-    #Splits the string into an array of the command and the distance
-    #Creates a new MoveCommand object and adds it to the @@move_commands array
+    # takes the line and the current position and returns the new position
+
+    # Takes the string line, chomps it and splits it into an array of strings
+    # => ["foward", "5"] 
+    command = line.chomp.split(" ")
+    # check for depth changes
+    #Note: Depth is a negative vector, so its a positive magnitude number
+    if command[0] == "up" || command[0] == "down"
+        if command[0] == "up"
+            # "Up" decreases the depth
+            position[1] -= command[1].to_i
+        else
+            position[1] += command[1].to_i
+        end
+    # check for horizontal changes
+    elsif command[0] == "forward" || command[0] == "backward"
+        if command[0] == "forward"
+            position[0] += command[1].to_i
+        else
+            position[0] -= command[1].to_i
+        end
+    end
+
+    
+    # returns the updated position
+    return position
 end
+
 
 sub_controls
