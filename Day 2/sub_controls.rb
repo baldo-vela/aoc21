@@ -40,6 +40,7 @@ def process_command(line, position)
             # "Up" decreases the depth
             position[1] -= command[1].to_i
         else
+            # "Down" increases the depth
             position[1] += command[1].to_i
         end
     # check for horizontal changes
