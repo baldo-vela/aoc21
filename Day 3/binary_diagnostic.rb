@@ -56,19 +56,20 @@ def solution
     puts "Initializing Day 3: Binary Diagnostic"
 
     # Load the input file
-    data = IO.readlines("input.txt")
-    test_data = Matrix.build()
+    #data = IO.readlines("input.txt")
+    test_data = IO.readlines("test.txt")
 
     # check if the file was loaded
-    if data == nil
+    if test_data == nil
         puts "Error: File not found"
     else
         # Removes extraneous new-line char
-        sanitized_data = data.map { |value| value.chomp }
+        sanitized_data = test_data.map { |value| value.chomp }
         
         puts "File found \nLoaded #{sanitized_data.length} lines of data"
         # Build a matrix, each row is a line from the input file
         process_data(sanitized_data)
+    end
         
 end
 
@@ -93,3 +94,4 @@ def calculate_rate(matrix)
     return [gamma_rate,epsilon_rate]
 end
 
+solution
