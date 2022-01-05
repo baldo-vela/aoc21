@@ -14,12 +14,15 @@ Each bit in the gamma rate can be determined by finding the most common bit in t
 00100
 11110
 10110
+
 10111
 10101
 01111
+
 00111
 11100
 10000
+
 11001
 00010
 01010
@@ -36,5 +39,57 @@ The epsilon rate is calculated in a similar way; rather than use the most common
 
 Use the binary numbers in your diagnostic report to calculate the gamma rate and epsilon rate, then multiply them together. What is the power consumption of the submarine? (Be sure to represent your answer in decimal, not binary.)
 
-
 =end
+# Part 1
+# To-Do:
+# Load the input file
+# Load the input into an array
+# Build a matrix, each row is a binary number string dynamically sized from the input file
+require 'matrix'
+
+def solution
+    # Control Function that calls the other functions
+    puts "Initializing Day 3: Binary Diagnostic"
+
+    # Load the input file
+    data = IO.readlines("input.txt")
+    test_data = Matrix.build()
+
+    # check if the file was loaded
+    if data == nil
+        puts "Error: File not found"
+    else
+        puts "File found \nLoaded #{data.length} lines of data"
+        # Build a matrix, each row is a line from the input file
+        process_data(data)
+        
+end
+
+def process_data(data)
+    # Build a matrix, each row is a binary number string dynamically sized from the input file
+    matrix = Matrix.new(data.length) { Array.new(data[0].length) }
+    # Fill the matrix with the binary number strings
+    #TODO Test this
+    data.each_with_index do |line, index|
+        line.chomp.split("").each_with_index do |char, index|
+            matrix[index][index] = char
+        end
+    end
+
+    # Calculate the gamma rate and epsilon rate
+    gamma_rate = calculate_gamma_rate(matrix)
+    epsilon_rate = calculate_epsilon_rate(matrix)
+    # Calculate the power consumption
+    power_consumption = gamma_rate * epsilon_rate
+    puts "Power Consumption: #{power_consumption}"
+    return (power_consumption, gamma_rate, epsilon_rate)
+end
+
+
+def calculate_gamma_rate(matrix)
+    # uses the given matrix to calculate the `gamma rate` given the problem description
+end
+
+def calculate_epsilon_rate(matrix)
+    # uses the given matrix to calculate the `epsilon rate` given the problem description
+end
