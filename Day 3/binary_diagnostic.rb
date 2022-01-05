@@ -14,18 +14,22 @@ Each bit in the gamma rate can be determined by finding the most common bit in t
 00100
 11110
 10110
-
 10111
 10101
 01111
-
 00111
 11100
 10000
-
 11001
 00010
 01010
+
+Width of the matrix: 5
+Height of the matrix: 12
+Element in the Matrix: [i,j]
+Sum of Column 0 = [0,0] + [0,1] + [0,2] + [0,3] + [0,4] + [0,5] + [0,6] + [0,7] + [0,8] + [0,9] + [0,10] + [0,11] 
+= [ 0 + 1 + 1 + 1 + 1 + 0 + 0 + 1 + 1 + 1 + 0 + 0] = 7
+Most Common bit in Column 0: 1
 
 Considering only the first bit of each number, there are five 0 bits and seven 1 bits. Since the most common bit is 1, the first bit of the gamma rate is 1.
 
@@ -59,37 +63,33 @@ def solution
     if data == nil
         puts "Error: File not found"
     else
-        puts "File found \nLoaded #{data.length} lines of data"
+        # Removes extraneous new-line char
+        sanitized_data = data.map { |value| value.chomp }
+        
+        puts "File found \nLoaded #{sanitized_data.length} lines of data"
         # Build a matrix, each row is a line from the input file
-        process_data(data)
+        process_data(sanitized_data)
         
 end
 
 def process_data(data)
-    # Build a matrix, each row is a binary number string dynamically sized from the input file
-    matrix = Matrix.new(data.length) { Array.new(data[0].length) }
-    # Fill the matrix with the binary number strings
-    #TODO Test this
-    data.each_with_index do |line, index|
-        line.chomp.split("").each_with_index do |char, index|
-            matrix[index][index] = char
-        end
-    end
+    # Build a matrix, each row is a binary number string dynamically sized from the input file, that is converted to an integer for addition
+    matrix = Matrix.build(data.length, data[0].length) { | row, col | data[row][col].to_i }
+    
+    # Calculates the gamma rate and epsilon rate
+    rates = calculate_rate(matrix)
 
-    # Calculate the gamma rate and epsilon rate
-    gamma_rate = calculate_gamma_rate(matrix)
-    epsilon_rate = calculate_epsilon_rate(matrix)
     # Calculate the power consumption
-    power_consumption = gamma_rate * epsilon_rate
+    power_consumption = rates[0] * rates[1]
     puts "Power Consumption: #{power_consumption}"
-    return (power_consumption, gamma_rate, epsilon_rate)
+    return [power_consumption, rates[0], rates[1]]
 end
 
 
-def calculate_gamma_rate(matrix)
+def calculate_rate(matrix)
     # uses the given matrix to calculate the `gamma rate` given the problem description
+    gamma_rate = 0
+    epsilon_rate = 0
+    return [gamma_rate,epsilon_rate]
 end
 
-def calculate_epsilon_rate(matrix)
-    # uses the given matrix to calculate the `epsilon rate` given the problem description
-end
