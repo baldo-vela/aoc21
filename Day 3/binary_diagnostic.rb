@@ -56,15 +56,15 @@ def solution
     puts "Initializing Day 3: Binary Diagnostic"
 
     # Load the input file
-    #data = IO.readlines("input.txt")
-    test_data = IO.readlines("test.txt")
+    data = IO.readlines("input.txt")
+    #test_data = IO.readlines("test.txt")
 
     # check if the file was loaded
-    if test_data == nil
+    if data == nil
         puts "Error: File not found"
     else
         # Removes extraneous new-line char
-        sanitized_data = test_data.map { |value| value.chomp }
+        sanitized_data = data.map { |value| value.chomp }
         
         puts "File found \nLoaded #{sanitized_data.length} lines of data"
         # Build a matrix, each row is a line from the input file
