@@ -81,17 +81,36 @@ def process_data(data)
     rates = calculate_rate(matrix)
 
     # Calculate the power consumption
-    power_consumption = rates[0] * rates[1]
+    power_consumption = rates[0].join.to_i(2) * rates[1].join.to_i(2)
+    puts "Gamma Rate (γ): #{rates[0].join.to_i(2)}"
+    puts "Epsilon Rate (ε): #{rates[1].join.to_i(2)}"
     puts "Power Consumption: #{power_consumption}"
     return [power_consumption, rates[0], rates[1]]
 end
 
 
-def calculate_rate(matrix)
+def calculate_rate(data)
     # uses the given matrix to calculate the `gamma rate` given the problem description
-    gamma_rate = 0
-    epsilon_rate = 0
-    return [gamma_rate,epsilon_rate]
+    gamma_rate = []
+    epsilon_rate = []
+    for i in 0..data.column_count-1 do
+        # Iterates from left to right inside the matrix, column by column to build the gamma and epsilon rates
+        sum = data.column(i).sum
+        puts "Sum of Column #{i} is #{sum}"
+        if sum >= (data.column(i).size/2)
+            # if the decimal sum of the column is greater than or equal to half the length of the column, then 1 is the most common digit
+            gamma_rate.push(1)
+            epsilon_rate.push(0)
+
+        else
+            # the decimal sum of the column is less than half the length of the column and 0 is the most common digit
+            gamma_rate.push(0)
+            epsilon_rate.push(1)
+
+        end
+
+    end
+    return [gamma_rate, epsilon_rate]
 end
 
 solution
