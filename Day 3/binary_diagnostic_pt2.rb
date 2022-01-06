@@ -34,3 +34,44 @@ Finally, to find the life support rating, multiply the oxygen generator rating (
 
 Use the binary numbers in your diagnostic report to calculate the oxygen generator rating and CO2 scrubber rating, then multiply them together. What is the life support rating of the submarine? (Be sure to represent your answer in decimal, not binary.)
 =end
+require 'matrix'
+def life_support_rating
+    puts "Initializing Day 3: Life Support Rating"
+
+    data = IO.readlines("test.txt")
+    if data == nil
+        puts "Error: File Not Found"
+    else
+        sanitized_data = data.map { |value| value.chomp }
+        
+        puts "File Found! \nLoaded #{sanitized_data.length} lines of data"
+        process_data(sanitized_data)
+    end
+end
+
+def process_data(data)
+    # Build a matrix, each row is a binary number string dynamically sized from the input file, that is converted to an integer for addition
+    matrix = Matrix.build(data.length, data[0].length) { | row, col | data[row][col].to_i }
+    oxy = find_oxy(matrix)
+    carbo = find_oxy(matrix)
+    puts "Life Support Rating: #{oxy*carbo}"
+
+end
+
+def find_oxy(data)
+    return 0
+end
+
+def find_carbo(data)
+    return 0
+end
+
+def most_common_bit(vector)
+    #Given a vector from the parent matrix return the most common digit. If tied returns '1'
+end
+
+def least_common_bit(vector)
+    #Given a vector from the parent matrix returns the least common digit. If tied returns '0'
+end
+
+life_support_rating
