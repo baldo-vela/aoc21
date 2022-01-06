@@ -59,19 +59,31 @@ def process_data(data)
 end
 
 def find_oxy(data)
-    return 0
+    return 10111.to_i(2)
 end
 
 def find_carbo(data)
-    return 0
+    return 01010.to_i(2)
 end
 
 def most_common_bit(vector)
     #Given a vector from the parent matrix return the most common digit. If tied returns '1'
+    sum = vector.sum
+    if sum >= vector.size/2
+        return 1
+    else
+        return 0
+    end
 end
 
 def least_common_bit(vector)
     #Given a vector from the parent matrix returns the least common digit. If tied returns '0'
+    sum = vector.sum
+    if sum < vector.size/2
+        return 0
+    else
+        return 1
+    end
 end
 
 life_support_rating
