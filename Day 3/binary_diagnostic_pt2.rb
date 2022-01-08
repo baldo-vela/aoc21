@@ -52,18 +52,39 @@ end
 def process_data(data)
     # Build a matrix, each row is a binary number string dynamically sized from the input file, that is converted to an integer for addition
     matrix = Matrix.build(data.length, data[0].length) { | row, col | data[row][col].to_i }
+    puts "---Current Lifesupport System Ratings---"
+
     oxy = find_oxy(matrix)
+    puts " Oxygen Generator: \t#{oxy}"
+
     carbo = find_oxy(matrix)
-    puts "Life Support Rating: #{oxy*carbo}"
+    puts " Carbon Dioxide: \t#{carbo}"
+    
+    puts " Life Support Rating: \t#{oxy*carbo}"
 
 end
 
 def find_oxy(data)
-    return 10111.to_i(2)
+    return 0
 end
 
 def find_carbo(data)
-    return 01010.to_i(2)
+    if !data
+        return null
+    else
+        return 0
+    end
+end
+
+#Index finding functions
+
+def find_oxy_index(data)
+    
+
+end
+
+def find_carbo_index(data)
+    
 end
 
 def most_common_bit(vector)
