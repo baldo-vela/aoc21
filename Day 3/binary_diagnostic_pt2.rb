@@ -66,25 +66,29 @@ end
 
 def find_oxy(data)
     # To find oxygen generator rating, determine the most common value (0 or 1) in the current bit position, and keep only numbers with that bit in that position. If 0 and 1 are equally common, keep values with a 1 in the position being considered.
-    return 0
+    if !data 
+        return null
+    else
+         return ('10111'.to_i(2))
+    end
 end
 
 def find_carbo(data)
     if !data
         return null
     else
-        return 0
+        return ('01010'.to_i(2))
     end
 end
 
-#Index finding functions
+#Indices finding functions
 
-def find_oxy_index(data)
+def find_oxy_indices(data)
     
 
 end
 
-def find_carbo_index(data)
+def find_carbo_indices(data)
     
 end
 # Bit Counting Functions
