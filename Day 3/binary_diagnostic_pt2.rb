@@ -35,6 +35,7 @@ Finally, to find the life support rating, multiply the oxygen generator rating (
 Use the binary numbers in your diagnostic report to calculate the oxygen generator rating and CO2 scrubber rating, then multiply them together. What is the life support rating of the submarine? (Be sure to represent your answer in decimal, not binary.)
 =end
 require 'matrix'
+# Head Control
 def life_support_rating
     puts "Initializing Day 3: Life Support Rating"
 
@@ -63,13 +64,14 @@ def process_data(data)
     puts " Life Support Rating: \t#{oxy*carbo}"
 
 end
-
+# Specific Life-Support Rating Finding Functions
 def find_oxy(data)
     # To find oxygen generator rating, determine the most common value (0 or 1) in the current bit position, and keep only numbers with that bit in that position. If 0 and 1 are equally common, keep values with a 1 in the position being considered.
     if !data 
         return null
     else
-         return ('10111'.to_i(2))
+        oxy = iterative_support_rating(data,'oxy')
+        return ('10111'.to_i(2))
     end
 end
 
@@ -80,15 +82,7 @@ def find_carbo(data)
         return ('01010'.to_i(2))
     end
 end
-
-#Indices finding functions
-
-def find_oxy_indices(data)
-    
-
-end
-
-def find_carbo_indices(data)
+def iterative_support_rating(data,'mode')
     
 end
 # Bit Counting Functions
