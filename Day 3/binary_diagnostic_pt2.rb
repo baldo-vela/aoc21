@@ -86,8 +86,18 @@ def find_carbo(data)
 end
 
 
-def iterative_support_rating(data,'mode')
-    
+def iterative_support_rating(data, mode)
+    # @data is a very large matrix, of both rows and columns
+    # @mode is a short string that toggles the switching
+    # Switch between 2 modes, finding Oxygen or Carbon Scrubber
+    case mode
+    when 'oxy'
+        puts "Searching for Oxygen Generator Rating..."
+    when 'carbo'
+        puts "Searching for CO2 Scrubber Rating..."
+    else 
+        "#{mode} is an Invalid Mode selection"
+    end
 end
 # Bit Counting Functions
 def most_common_bit(vector)
