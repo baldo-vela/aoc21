@@ -65,6 +65,8 @@ def process_data(data)
 
 end
 # Specific Life-Support Rating Finding Functions
+# These are both just here as rudimentary error, and null checking catches.
+# TODO: Flesh out the error catching in these two functions
 def find_oxy(data)
     # To find oxygen generator rating, determine the most common value (0 or 1) in the current bit position, and keep only numbers with that bit in that position. If 0 and 1 are equally common, keep values with a 1 in the position being considered.
     if !data 
@@ -82,6 +84,8 @@ def find_carbo(data)
         return ('01010'.to_i(2))
     end
 end
+
+
 def iterative_support_rating(data,'mode')
     
 end
